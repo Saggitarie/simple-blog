@@ -1,0 +1,73 @@
+@use 'sass:math'
+
+// Units According to TypeScale
+$scale: 1.2
+$unit-base: 14px
+
+$unit1: 1rem
+$unit2: $unit1 * $scale
+$unit3: $unit2 * $scale
+$unit4: $unit3 * $scale
+$unit5: $unit4 * $scale
+$unit6: $unit5 * $scale
+$unit7: $unit6 * $scale
+$unit8: $unit7 * $scale
+$unit9: $unit8 * $scale
+$unit10: $unit9 * $scale
+$unit11: $unit10 * $scale
+$unit12: $unit11 * $scale
+$unit13: $unit12 * $scale
+$unit14: $unit13 * $scale
+$unit15: $unit14 * $scale
+$unit16: $unit15 * $scale
+$unit17: $unit16 * $scale
+$unit18: $unit17 * $scale
+$unit19: $unit18 * $scale
+$unit20: $unit19 * $scale
+$unit21: $unit20 * $scale
+$unit22: $unit21 * $scale
+$unit23: $unit22 * $scale
+$unit24: $unit23 * $scale
+$unit25: $unit24 * $scale
+$unit26: $unit25 * $scale
+$unit27: $unit26 * $scale
+
+$unit-1: math.div($unit1, $scale)
+$unit-2: math.div($unit-1, $scale)
+$unit-3: math.div($unit-2, $scale)
+$unit-4: math.div($unit-3, $scale)
+$unit-5: math.div($unit-4, $scale)
+$unit-6: math.div($unit-5, $scale)
+$unit-7: math.div($unit-6, $scale)
+$unit-8: math.div($unit-7, $scale)
+$unit-9: math.div($unit-8, $scale)
+$unit-10: math.div($unit-9, $scale)
+
+$space: $unit1
+$space-small: $unit-4
+$space-medium: $unit3
+$space-big: $unit6
+
+// Sizes
+$width-default: $unit27
+
+// Website Parts Unit
+$container-padding: $unit1
+$scrollbar-width: $unit2
+
+// Font Assignments
+$font: 'Noto Sans JP', sans-serif
+$font-header: $font
+$font-weight-normal: 300
+$font-weight-header: 400
+$font-weight-bold: 500
+$font-weight: $font-weight-normal
+
+// Colors
+$blue-hue: 206 !default
+$hue: $blue-hue !default
+$black: hsl($hue, 10%, 10%) !default
+$white: hsl($hue, 10%, 100%) !default
+
+// Color Assignments
+$color: $black

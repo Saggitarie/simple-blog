@@ -1,0 +1,56 @@
+@use "./vars" as *
+@use "./mixins" as *
+
+.blog-ui-html
+  font-size: $unit-base
+
+.blog-ui
+  font-family: $font
+  font-weight: $font-weight
+  color: $color
+  margin: 0
+
+  .container
+    position: relative
+    width: $width-default
+    max-width: 100%
+    padding: 0 $container-padding
+    padding-right: calc(#{$container-padding} + #{$scrollbar-width})
+    margin: 0 auto
+
+  .flex
+    display: flex
+    align-items: center
+  .flex-inline
+    display: inline-flex
+    align-items: center
+  .flex-space-between
+    display: flex
+    justify-content: space-between
+    align-items: center
+  .flex-end
+    display: flex
+    align-items: center
+    justify-content: flex-end
+  .flex-start
+    display: flex
+    align-items: flex-start
+    justify-content: flex-start
+
+  // center
+  .center
+    display: flex
+    flex-direction: column
+    justify-content: space-around
+    align-items: center
+  .center-text
+    text-align: center
+
+  .space-items
+    @include space($space)
+  .space-items-small
+    @include space($space-small)
+  .space-items-medium
+    @include space($space-medium)
+  .space-items-big
+    @include space($space-big)
