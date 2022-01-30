@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction, current } from "@reduxjs/toolkit";
 
-import { includes } from "lodash";
+import { includes, chunk } from "lodash";
 
 import { getPosts, getComments } from "@features/blog/blog-api";
 
@@ -28,17 +28,21 @@ export interface BlogPostComment {
 }
 
 export interface BlogState {
+  paginationIndex: 0;
   postsData: BlogPost[];
   commentsData: BlogComment[];
   blogData: BlogPostComment[];
   filterBlogData: BlogPostComment[];
+  renderBlogData: BlogPostComment[];
 }
 
 const initialState: BlogState = {
+  paginationIndex: 0,
   postsData: [],
   commentsData: [],
   blogData: [],
   filterBlogData: [],
+  renderBlogData: [],
 };
 
 export const fetchBlogPosts = createAsyncThunk<Array<BlogPost>, undefined>(
@@ -81,18 +85,34 @@ const postsSlice = createSlice({
       state.commentsData.forEach((el) => {
         const postId = el.postId - 1;
 
-        if (!state.blogData[postId].comments) {
+        if (!state.blogData[postId] && !state.blogData[postId].comments) {
           state.blogData[postId].comments = [];
           state.blogData[postId].comments?.push(el);
         } else state.blogData[postId].comments?.push(el);
       });
-
-      state.filterBlogData = state.blogData;
     },
     searchBlogPosts: (state, action: PayloadAction<string>) => {
-      state.filterBlogData = state.blogData.filter(
+      const filterData = state.blogData.filter(
         (blog) => includes(blog.title, action.payload) || includes(blog.body, action.payload)
       );
+
+      state.filterBlogData = chunk(filterData, 5);
+
+      // state.paginationIndex = 0;
+      state.renderBlogData.splice(0);
+      state.renderBlogData.splice(0, 0, state.filterBlogData[state.paginationIndex]);
+    },
+    incrementPaginationIndex: (state) => {
+      if (state.paginationIndex <= state.filterBlogData.length) state.paginationIndex++;
+
+      state.renderBlogData.splice(0);
+      state.renderBlogData.splice(0, 0, state.filterBlogData[state.paginationIndex]);
+    },
+    decrementPaginationIndex: (state) => {
+      if (state.paginationIndex >= 0) state.paginationIndex--;
+
+      state.renderBlogData.splice(0);
+      state.renderBlogData.splice(0, 0, state.filterBlogData[state.paginationIndex]);
     },
   },
   extraReducers: (builder) => {
@@ -108,6 +128,11 @@ const postsSlice = createSlice({
   },
 });
 
-export const { formatBlogPostsForRender, searchBlogPosts } = postsSlice.actions;
+export const {
+  formatBlogPostsForRender,
+  searchBlogPosts,
+  incrementPaginationIndex,
+  decrementPaginationIndex,
+} = postsSlice.actions;
 
 export default postsSlice.reducer;
