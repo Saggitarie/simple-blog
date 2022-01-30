@@ -6,7 +6,6 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { fetchBlogPosts, fetchBlogComments } from "@features/blog/blog-slice";
-import Button from "@components/button";
 
 import { incrementPaginationIndex, decrementPaginationIndex } from "@features/blog/blog-slice";
 

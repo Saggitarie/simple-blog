@@ -96,20 +96,21 @@ const postsSlice = createSlice({
         (blog) => includes(blog.title, action.payload) || includes(blog.body, action.payload)
       );
 
-      state.filterBlogData = chunk(filterData, 5);
-
-      // state.paginationIndex = 0;
       state.renderBlogData.splice(0);
-      state.renderBlogData.splice(0, 0, state.filterBlogData[state.paginationIndex]);
+
+      if (filterData.length > 0) {
+        state.filterBlogData = chunk(filterData, 5);
+        state.renderBlogData.splice(0, 0, state.filterBlogData[state.paginationIndex]);
+      }
     },
     incrementPaginationIndex: (state) => {
-      if (state.paginationIndex <= state.filterBlogData.length) state.paginationIndex++;
+      if (state.paginationIndex < state.filterBlogData.length / 2) state.paginationIndex++;
 
       state.renderBlogData.splice(0);
       state.renderBlogData.splice(0, 0, state.filterBlogData[state.paginationIndex]);
     },
     decrementPaginationIndex: (state) => {
-      if (state.paginationIndex >= 0) state.paginationIndex--;
+      if (state.paginationIndex > 0) state.paginationIndex--;
 
       state.renderBlogData.splice(0);
       state.renderBlogData.splice(0, 0, state.filterBlogData[state.paginationIndex]);
