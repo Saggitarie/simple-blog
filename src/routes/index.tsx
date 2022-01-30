@@ -1,10 +1,10 @@
-import Blog from "@features/posts/BlogPosts";
+import Blog from "@features/blog/blog-posts";
 
 import { RootState } from "@app/store";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchBlogPosts, fetchBlogComments } from "@features/posts/postsSlice";
+import { fetchBlogPosts, fetchBlogComments } from "@features/blog/blog-slice";
 
 const Home: React.FC = () => {
   const posts = useSelector((state: RootState) => state.posts.blogData);

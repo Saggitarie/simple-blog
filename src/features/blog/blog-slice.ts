@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { getPosts, getComments } from "@features/posts/postsAPI";
+import { getPosts, getComments } from "@features/blog/blog-api";
 
 export interface BlogPost {
   userId: number;
