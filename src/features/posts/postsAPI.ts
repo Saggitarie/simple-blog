@@ -9,3 +9,9 @@ export const getPosts = async () => {
 
   return data;
 };
+
+export const getComments = async () => {
+  const { data } = await instance.get("/comments");
+
+  return data;
+};
