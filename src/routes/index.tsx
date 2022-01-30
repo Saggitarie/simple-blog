@@ -1,4 +1,5 @@
 import Blog from "@features/blog/blog-posts";
+import BlogSearch from "@features/blog/blog-search";
 
 import { RootState } from "@app/store";
 import { useEffect } from "react";
@@ -7,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchBlogPosts, fetchBlogComments } from "@features/blog/blog-slice";
 
 const Home: React.FC = () => {
-  const posts = useSelector((state: RootState) => state.posts.blogData);
+  const posts = useSelector((state: RootState) => state.posts.filterBlogData);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,11 +19,13 @@ const Home: React.FC = () => {
   return (
     <div className="container space-items-medium">
       <h1 className="center">Simple Blog Post Page</h1>
+      <BlogSearch />
       {posts.map((post) => {
         return (
           <div key={post.id}>
-            <div>{post.title}</div>
-            {post.comments?.map((el) => {
+            <strong>POST TITLE: {post.title}</strong>
+            <div>POST BODY: {post.body}</div>
+            {/* {post.comments?.map((el) => {
               return (
                 <div key={el.id}>
                   <div>{el.id}</div>
@@ -30,7 +33,7 @@ const Home: React.FC = () => {
                   <div>{el.email}</div>
                 </div>
               );
-            })}
+            })} */}
           </div>
         );
       })}

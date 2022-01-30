@@ -1,4 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+import { includes } from "lodash";
 
 import { getPosts, getComments } from "@features/blog/blog-api";
 
@@ -29,12 +31,14 @@ export interface BlogState {
   postsData: BlogPost[];
   commentsData: BlogComment[];
   blogData: BlogPostComment[];
+  filterBlogData: BlogPostComment[];
 }
 
 const initialState: BlogState = {
   postsData: [],
   commentsData: [],
   blogData: [],
+  filterBlogData: [],
 };
 
 export const fetchBlogPosts = createAsyncThunk<Array<BlogPost>, undefined>(
@@ -82,6 +86,13 @@ const postsSlice = createSlice({
           state.blogData[postId].comments?.push(el);
         } else state.blogData[postId].comments?.push(el);
       });
+
+      state.filterBlogData = state.blogData;
+    },
+    searchBlogPosts: (state, action: PayloadAction<string>) => {
+      state.filterBlogData = state.blogData.filter(
+        (blog) => includes(blog.title, action.payload) || includes(blog.body, action.payload)
+      );
     },
   },
   extraReducers: (builder) => {
@@ -97,6 +108,6 @@ const postsSlice = createSlice({
   },
 });
 
-export const { formatBlogPostsForRender } = postsSlice.actions;
+export const { formatBlogPostsForRender, searchBlogPosts } = postsSlice.actions;
 
 export default postsSlice.reducer;

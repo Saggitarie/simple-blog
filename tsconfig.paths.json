@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
+      "lodash": ["./types/lodash"],
       "@features/*": ["./features/*"],
       "@assets/*": ["./assets/*"],
       "@app/*": ["./app/*"],
