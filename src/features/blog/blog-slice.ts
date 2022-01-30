@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction, current } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { includes, chunk } from "lodash";
 
@@ -85,7 +85,7 @@ const postsSlice = createSlice({
       state.commentsData.forEach((el) => {
         const postId = el.postId - 1;
 
-        if (!state.blogData[postId] && !state.blogData[postId].comments) {
+        if (!state.blogData[postId].comments) {
           state.blogData[postId].comments = [];
           state.blogData[postId].comments?.push(el);
         } else state.blogData[postId].comments?.push(el);

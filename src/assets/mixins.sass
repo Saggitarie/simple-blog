@@ -1,3 +1,19 @@
+@use "./vars" as *
+
 @mixin space($this-space)
   > *:not(:last-child)
     margin-bottom: $this-space
+
+@mixin rounded-big($radius: $border-radius-big)
+  border-radius: $radius
+.rounded-big
+  @include rounded-big
+
+@mixin box-shadow-big
+  box-shadow: 0 20px 40px $shadow, 0 15px 12px $shadow-2
+.box-shadow-big
+  @include box-shadow-big
+
+@mixin mq($breakpoint: md)
+  @media #{map-get($breakpoints, $breakpoint)}
+    @content

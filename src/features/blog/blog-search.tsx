@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 
 import { searchBlogPosts } from "@features/blog/blog-slice";
 
+import "@features/blog/blog-search.sass";
+
 const BlogPosts: React.FC = () => {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
@@ -23,8 +25,8 @@ const BlogPosts: React.FC = () => {
     setInput(e.target.value);
   };
   return (
-    <div className="test">
-      <input onChange={handleUserInput} type="text" placeholder="Search" />
+    <div id="search">
+      <input onChange={handleUserInput} type="text" placeholder="Search" className="user-input" />
     </div>
   );
 };

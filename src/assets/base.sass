@@ -13,7 +13,7 @@
   .container
     position: relative
     width: $width-default
-    max-width: 100%
+    max-width: 90%
     padding: 0 $container-padding
     padding-right: calc(#{$container-padding} + #{$scrollbar-width})
     margin: 0 auto
@@ -45,6 +45,13 @@
     align-items: center
   .center-text
     text-align: center
+
+  .panel
+    background: $bg
+    padding: $panel-padding
+    @include rounded-big
+    @include box-shadow-big
+
 
   .space-items
     @include space($space)
