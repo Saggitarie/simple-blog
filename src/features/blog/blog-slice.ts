@@ -124,7 +124,6 @@ const postsSlice = createSlice({
       })
       .addCase(fetchBlogComments.fulfilled, (state, action) => {
         state.commentsData = action.payload;
-        postsSlice.caseReducers.formatBlogPostsForRender(state);
       });
   },
 });

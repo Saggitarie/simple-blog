@@ -1,11 +1,15 @@
-import { RootState } from "@app/store";
+import { RootState, useAppDispatch } from "@app/store";
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Post from "@features/blog/blog-posts";
 import BlogSearch from "@features/blog/blog-search";
 
-import { fetchBlogPosts, fetchBlogComments } from "@features/blog/blog-slice";
+import {
+  fetchBlogPosts,
+  fetchBlogComments,
+  formatBlogPostsForRender,
+} from "@features/blog/blog-slice";
 
 import { incrementPaginationIndex, decrementPaginationIndex } from "@features/blog/blog-slice";
 
@@ -13,11 +17,16 @@ import "@routes/home.sass";
 
 const Home: React.FC = () => {
   const posts = useSelector((state: RootState) => state.posts.renderBlogData);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchBlogPosts());
-    dispatch(fetchBlogComments());
+    const initialFetch = async () => {
+      await dispatch(fetchBlogPosts());
+      await dispatch(fetchBlogComments());
+
+      dispatch(formatBlogPostsForRender());
+    };
+    initialFetch();
   }, [dispatch]);
 
   const handlePagination = (direction: string) => {
