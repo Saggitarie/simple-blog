@@ -1,0 +1,20 @@
+@use "../../assets/vars.sass" as *
+@use "../../assets/mixins.sass" as *
+
+#comment
+  .user-icon
+    width: $unit4
+    fill: $blue
+
+    @include mq($breakpoint: md)
+      width: $unit3
+
+  .comment-wrapper
+    display: flex
+    align-items: flex-start
+
+  .comment-icon
+    min-width: $unit6
+
+    display: flex
+    justify-content: center
