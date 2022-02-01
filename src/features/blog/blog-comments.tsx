@@ -1,6 +1,8 @@
-import "@features/blog/blog-posts.sass";
-
 import { BlogComment } from "@features/blog/blog-slice";
+
+import { ReactComponent as AnonymousUser } from "@assets/images/user.svg";
+
+import "@features/blog/blog-comments.sass";
 
 type Props = {
   comment: BlogComment;
@@ -9,9 +11,15 @@ type Props = {
 const BlogPosts: React.FC<Props> = ({ comment }) => {
   return (
     <div id="comment">
-      <div>Comment User Name: {comment.name}</div>
-      <div>Comment User Email: {comment.email}</div>
-      <div>{comment.body}</div>
+      <div className="comment-wrapper space-items-big">
+        <div className="comment-icon">
+          <AnonymousUser className="user-icon" />
+        </div>
+        <div className="comment-content">
+          <strong>{comment.email}</strong>
+          <div>{comment.body}</div>
+        </div>
+      </div>
     </div>
   );
 };

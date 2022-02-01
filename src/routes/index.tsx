@@ -1,9 +1,12 @@
-import { RootState, useAppDispatch } from "@app/store";
 import React, { useEffect } from "react";
+
+import { RootState, useAppDispatch } from "@app/store";
 import { useSelector } from "react-redux";
 
 import Post from "@features/blog/blog-posts";
 import BlogSearch from "@features/blog/blog-search";
+
+import "@routes/home.sass";
 
 import {
   fetchBlogPosts,
@@ -14,6 +17,7 @@ import {
 import { incrementPaginationIndex, decrementPaginationIndex } from "@features/blog/blog-slice";
 
 import "@routes/home.sass";
+import Button from "@components/button";
 
 const Home: React.FC = () => {
   const posts = useSelector((state: RootState) => state.posts.renderBlogData);
@@ -35,7 +39,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="home">
+    <div id="home">
       <div className="container space-items-medium">
         <h2 className="center">Simple Blog Post Page</h2>
         <div className="flex-end">
@@ -54,8 +58,12 @@ const Home: React.FC = () => {
         )}
         <div className="pagination-button">
           <div className="flex-space-between">
-            <button onClick={() => handlePagination("prev")}>Prev</button>
-            <button onClick={() => handlePagination("next")}>Next</button>
+            <Button direction="prev" handleEvent={handlePagination}>
+              <span>Prev</span>
+            </Button>
+            <Button direction="next" handleEvent={handlePagination}>
+              <span>Next</span>
+            </Button>
           </div>
         </div>
       </div>

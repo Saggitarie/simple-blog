@@ -4,6 +4,12 @@
   > *:not(:last-child)
     margin-bottom: $this-space
 
+  @include mq($breakpoint: md)
+    margin-bottom: $unit1
+
+  @include mq($breakpoint: sm)
+    margin-bottom: $unit2
+
 @mixin rounded-big($radius: $border-radius-big)
   border-radius: $radius
 .rounded-big

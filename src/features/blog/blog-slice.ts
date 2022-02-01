@@ -28,7 +28,8 @@ export interface BlogPostComment {
 }
 
 export interface BlogState {
-  paginationIndex: 0;
+  paginationIndex: number;
+  paginationEndIndex: number;
   postsData: BlogPost[];
   commentsData: BlogComment[];
   blogData: BlogPostComment[];
@@ -38,6 +39,7 @@ export interface BlogState {
 
 const initialState: BlogState = {
   paginationIndex: 0,
+  paginationEndIndex: 0,
   postsData: [],
   commentsData: [],
   blogData: [],
@@ -96,15 +98,17 @@ const postsSlice = createSlice({
         (blog) => includes(blog.title, action.payload) || includes(blog.body, action.payload)
       );
 
+      state.paginationIndex = 0;
       state.renderBlogData.splice(0);
 
       if (filterData.length > 0) {
         state.filterBlogData = chunk(filterData, 5);
+        state.paginationEndIndex = state.filterBlogData.length - 1;
         state.renderBlogData.splice(0, 0, state.filterBlogData[state.paginationIndex]);
       }
     },
     incrementPaginationIndex: (state) => {
-      if (state.paginationIndex < state.filterBlogData.length / 2) state.paginationIndex++;
+      if (state.paginationIndex < state.filterBlogData.length) state.paginationIndex++;
 
       state.renderBlogData.splice(0);
       state.renderBlogData.splice(0, 0, state.filterBlogData[state.paginationIndex]);

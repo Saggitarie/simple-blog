@@ -52,6 +52,16 @@
     @include rounded-big
     @include box-shadow-big
 
+  button
+    color: $blue
+    border: 2px solid $blue
+    border-radius: $unit-4
+    background-color: transparent
+    text-transform: uppercase
+    padding: $unit-1 $unit6
+
+    &:disabled
+      color: $grey
 
   .space-items
     @include space($space)
