@@ -31,8 +31,6 @@ describe("Home", () => {
     expect(screen.getByTestId("ball-triangle-svg")).toBeInTheDocument();
 
     expect(screen.getByPlaceholderText(/Search/)).toBeInTheDocument();
-
-    cleanup();
   });
 
   test("Check If Right Amount of Posts and Comments Per Posts are Rendered", async () => {
