@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { RootState, useAppDispatch } from "@app/store";
 import { useSelector } from "react-redux";
 
 import Post from "@features/blog/blog-posts";
 import BlogSearch from "@features/blog/blog-search";
+
+import { BallTriangle } from "react-loader-spinner";
 
 import "@routes/home.sass";
 
@@ -21,6 +23,7 @@ import Button from "@components/button";
 
 const Home: React.FC = () => {
   const posts = useSelector((state: RootState) => state.posts.renderBlogData);
+  const isLoading = useSelector((state: RootState) => state.posts.isLoading);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -45,27 +48,35 @@ const Home: React.FC = () => {
         <div className="flex-end">
           <BlogSearch />
         </div>
-        {posts.flat().length !== 0 ? (
-          posts.flat().map((post, index) => {
-            return (
-              <div key={index}>
-                <Post post={post} />
-              </div>
-            );
-          })
-        ) : (
-          <div>No Result</div>
-        )}
-        <div className="pagination-button">
-          <div className="flex-space-between">
-            <Button direction="prev" handleEvent={handlePagination}>
-              <span>Prev</span>
-            </Button>
-            <Button direction="next" handleEvent={handlePagination}>
-              <span>Next</span>
-            </Button>
+        {isLoading ? (
+          <div className="loading-animation">
+            <BallTriangle />
           </div>
-        </div>
+        ) : (
+          <div>
+            {posts.flat().length !== 0 ? (
+              posts.flat().map((post, index) => {
+                return (
+                  <div key={index}>
+                    <Post post={post} />
+                  </div>
+                );
+              })
+            ) : (
+              <div>No Result</div>
+            )}
+            <div className="pagination-button">
+              <div className="flex-space-between">
+                <Button direction="prev" handleEvent={handlePagination}>
+                  <span>Prev</span>
+                </Button>
+                <Button direction="next" handleEvent={handlePagination}>
+                  <span>Next</span>
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

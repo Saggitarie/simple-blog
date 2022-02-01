@@ -28,6 +28,7 @@ export interface BlogPostComment {
 }
 
 export interface BlogState {
+  isLoading: boolean;
   paginationIndex: number;
   paginationEndIndex: number;
   postsData: BlogPost[];
@@ -38,6 +39,7 @@ export interface BlogState {
 }
 
 const initialState: BlogState = {
+  isLoading: true,
   paginationIndex: 0,
   paginationEndIndex: 0,
   postsData: [],
@@ -100,6 +102,7 @@ const postsSlice = createSlice({
 
       state.paginationIndex = 0;
       state.renderBlogData.splice(0);
+      state.isLoading = false;
 
       if (filterData.length > 0) {
         state.filterBlogData = chunk(filterData, 5);
@@ -122,6 +125,9 @@ const postsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchBlogPosts.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(fetchBlogPosts.fulfilled, (state, action) => {
         state.postsData = action.payload;
         state.blogData = action.payload;

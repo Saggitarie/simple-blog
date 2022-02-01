@@ -1,6 +1,18 @@
 @use "../assets/vars" as *
+@use "../assets/mixins" as *
 
 #home
+  height: 100vh
+  position: relative
   .pagination-button
     width: 90%
-    margin: 0 auto
+    margin: $unit1 auto
+
+  .loading-animation
+    @include mq($breakpoint: md)
+      top: 35%
+      left: 35%
+
+    position: fixed
+    top: 46%
+    left: 46%
