@@ -39,6 +39,8 @@ const Home: React.FC = () => {
   const handlePagination = (direction: string) => {
     if (direction === "next") dispatch(incrementPaginationIndex());
     else dispatch(decrementPaginationIndex());
+
+    window.scrollTo(0, 0);
   };
 
   return (
