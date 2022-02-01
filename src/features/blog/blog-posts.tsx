@@ -18,7 +18,7 @@ const BlogPosts: React.FC<Props> = ({ post }) => {
 
   return (
     <div id="posts" className="space-items-small">
-      <div className="panel">
+      <div className="panel" data-testid="blog-post">
         <h2 className="post-title">{post.title}</h2>
         <div className="post-body">{post.body}</div>
       </div>
@@ -33,10 +33,10 @@ const BlogPosts: React.FC<Props> = ({ post }) => {
               expandCommentRefiner ? "content-area-expand" : "content-area-collapse"
             }`}
           >
-            {post.comments?.map((comment) => {
+            {post.comments?.map((comment, index) => {
               return (
                 <div
-                  key={comment.id}
+                  key={`blogposts-${index}`}
                   className={`${
                     expandCommentRefiner ? "comment-list-expand" : "comment-list-collapse"
                   }`}

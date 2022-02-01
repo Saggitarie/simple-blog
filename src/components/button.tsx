@@ -23,7 +23,11 @@ const Button: React.FC<Props> = ({ direction, handleEvent, children }) => {
 
   return (
     <div id="button">
-      <button onClick={() => handleEvent(direction)} disabled={isClickDisabled}>
+      <button
+        onClick={() => handleEvent(direction)}
+        disabled={isClickDisabled}
+        data-testid={`${direction}-button`}
+      >
         {children}
       </button>
     </div>

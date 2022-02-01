@@ -4,7 +4,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { store } from "@app/store";
 import { Provider } from "react-redux";
 
-import Home from "@routes/";
+import Home from "@routes/home";
 import "@assets/base.sass";
 
 const App = () => {

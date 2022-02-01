@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import { RootState, useAppDispatch } from "@app/store";
 import { useSelector } from "react-redux";
@@ -59,7 +59,7 @@ const Home: React.FC = () => {
             {posts.flat().length !== 0 ? (
               posts.flat().map((post, index) => {
                 return (
-                  <div key={index}>
+                  <div key={`home-${index}`}>
                     <Post post={post} />
                   </div>
                 );
