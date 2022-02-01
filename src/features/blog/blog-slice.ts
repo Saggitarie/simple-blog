@@ -125,9 +125,6 @@ const postsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchBlogPosts.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(fetchBlogPosts.fulfilled, (state, action) => {
         state.postsData = action.payload;
         state.blogData = action.payload;
