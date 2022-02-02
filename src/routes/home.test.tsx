@@ -7,7 +7,7 @@ import { store } from "@app/store";
 
 import { Provider } from "react-redux";
 
-describe("Home", () => {
+describe("When The App Launches For the First Time", () => {
   afterAll(() => {
     cleanup();
   });
@@ -45,29 +45,5 @@ describe("Home", () => {
 
     const viewbuttons = await screen.findAllByText(/View Comments/);
     expect(viewbuttons).toHaveLength(5);
-  });
-
-  test("Check If Previous Button Is Disabled On Intial Render", async () => {
-    render(
-      <Provider store={store}>
-        <Home />
-      </Provider>
-    );
-
-    const previousbutton = await screen.findByTestId("prev-button");
-
-    expect(previousbutton).toBeDisabled();
-  });
-
-  test("Check If Next Button Is Enabled On Intial Render", async () => {
-    render(
-      <Provider store={store}>
-        <Home />
-      </Provider>
-    );
-
-    const previousbutton = await screen.findByTestId("next-button");
-
-    expect(previousbutton).toBeEnabled();
   });
 });

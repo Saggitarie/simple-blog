@@ -10,7 +10,7 @@ type Props = {
 
 const BlogPosts: React.FC<Props> = ({ comment }) => {
   return (
-    <div id="comment" data-testid="blog-comment">
+    <div id="comment">
       <div className="comment-wrapper space-items-big">
         <div className="comment-icon">
           <AnonymousUser className="user-icon" />

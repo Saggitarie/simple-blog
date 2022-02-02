@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Comments from "@features/blog/blog-comments";
 
 import { BlogPostComment } from "@features/blog/blog-slice";
 
 import "@features/blog/blog-posts.sass";
+import { useSelector } from "react-redux";
+import { RootState } from "@app/store";
 
 type Props = {
   post: BlogPostComment;
@@ -11,10 +13,15 @@ type Props = {
 
 const BlogPosts: React.FC<Props> = ({ post }) => {
   const [expandCommentRefiner, setExpandCommentRefiner] = useState(false);
+  const pageIndex = useSelector((state: RootState) => state.posts.paginationIndex);
 
   const handleToggleCommentPanel = () => {
     setExpandCommentRefiner(!expandCommentRefiner);
   };
+
+  useEffect(() => {
+    setExpandCommentRefiner(false);
+  }, [pageIndex]);
 
   return (
     <div id="posts" className="space-items-small">
@@ -36,10 +43,11 @@ const BlogPosts: React.FC<Props> = ({ post }) => {
             {post.comments?.map((comment, index) => {
               return (
                 <div
-                  key={`blogposts-${index}`}
+                  key={`${comment.name}-${index}`}
                   className={`${
                     expandCommentRefiner ? "comment-list-expand" : "comment-list-collapse"
                   }`}
+                  data-testid="blog-comments"
                 >
                   <Comments comment={comment} />
                 </div>
@@ -48,7 +56,11 @@ const BlogPosts: React.FC<Props> = ({ post }) => {
           </div>
         </div>
       </div>
-      <div className="view-comment-button" onClick={handleToggleCommentPanel}>
+      <div
+        className="view-comment-button"
+        onClick={handleToggleCommentPanel}
+        data-testid="view-comments-button"
+      >
         {expandCommentRefiner ? (
           <p>Close Comments</p>
         ) : (
