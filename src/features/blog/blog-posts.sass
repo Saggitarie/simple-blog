@@ -2,28 +2,29 @@
 
 #posts
   .comment-refiner
-    background: #F2F2F2
+    background: $blue-hue
     min-height: max-content
 
-  .comment-refiner-content
-    width: 100%
-    min-height: max-content
-    border-radius: $unit-1
-    border-bottom: 1px solid #c8c8c8
-    background: $white
+    &__content
+      width: 100%
+      min-height: max-content
+      border-radius: $unit-1
+      border-bottom: 1px solid $grey
+      background: $white
 
-  .comment-content-area-expand
-    height: max-content
-    padding: 1px
+      &--expand
+        height: max-content
+        padding: 1px
 
-  .comment-content-area-collapse
-    height: 0px
-    border-bottom: 0px solid white
+      &--collapse
+        height: 0px
+        border-bottom: 0px solid $white
 
-  .comment-list-collapse
-    display: none
+    &__list
+      &--collapse
+        display: none
 
-  .view-comment-button
+  .view-comments-button
     cursor: pointer
     padding: $unit-1
     border: 1px solid $shadow

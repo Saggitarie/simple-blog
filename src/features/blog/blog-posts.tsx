@@ -20,24 +20,27 @@ const BlogPosts: React.FC<Props> = ({ post }) => {
   };
 
   useEffect(() => {
+    // Collapse Comments When Moving To Next/Previous Page
     setExpandCommentRefiner(false);
   }, [pageIndex]);
 
   return (
     <div id="posts" className="space-items-small">
-      <div className="panel" data-testid="blog-post">
-        <h2 className="post-title">{post.title}</h2>
-        <div className="post-body">{post.body}</div>
+      <div className="panel post" data-testid="blog-post">
+        <h2 className="post__title">{post.title}</h2>
+        <div className="post__body">{post.body}</div>
       </div>
       <div className="comment-refiner">
         <div
-          className={`comment-refiner-content ${
-            expandCommentRefiner ? "comment-content-area-expand" : "comment-content-area-collapse"
+          className={`comment-refiner__content ${
+            expandCommentRefiner
+              ? "comment-refiner__content--expand"
+              : "comment-refiner__content--collapse"
           }`}
         >
           <div
             className={`content-area  ${
-              expandCommentRefiner ? "content-area-expand" : "content-area-collapse"
+              expandCommentRefiner ? "content-area--expand" : "content-area--collapse"
             }`}
           >
             {post.comments?.map((comment, index) => {
@@ -45,7 +48,9 @@ const BlogPosts: React.FC<Props> = ({ post }) => {
                 <div
                   key={`${comment.name}-${index}`}
                   className={`${
-                    expandCommentRefiner ? "comment-list-expand" : "comment-list-collapse"
+                    expandCommentRefiner
+                      ? "comment-refiner__list--expand"
+                      : "comment-refiner__list--collapse"
                   }`}
                   data-testid="blog-comments"
                 >
@@ -57,7 +62,7 @@ const BlogPosts: React.FC<Props> = ({ post }) => {
         </div>
       </div>
       <div
-        className="view-comment-button"
+        className="view-comments-button"
         onClick={handleToggleCommentPanel}
         data-testid="view-comments-button"
       >

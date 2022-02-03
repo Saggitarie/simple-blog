@@ -1,5 +1,6 @@
 @use 'sass:math'
 
+// Specify Breakpoints
 $breakpoints: ( 'sm': 'screen and (max-width: 400px)', 'md': 'screen and (max-width: 768px)', 'lg': 'screen and (max-width: 1000px)', 'xl': 'screen and (max-width: 1200px)') !default
 
 // Units According to TypeScale
@@ -72,7 +73,7 @@ $font-weight-header:            400
 $font-weight-bold:              500
 $font-weight:                   $font-weight-normal
 
-// Colors
+// Color Assignments
 $blue-hue:                      206 !default
 $hue:                           $blue-hue !default
 $black:                         hsl($hue, 10%, 10%) !default
@@ -82,7 +83,6 @@ $grey-hue:				              0 !default
 $grey:					                hsl($grey-hue, 0%, 67%) !default
 $bg:                 	          $white !default
 
-// Color Assignments
 $color:                         $black
 
 // Shadow

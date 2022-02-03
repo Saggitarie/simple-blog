@@ -11,11 +11,11 @@ type Props = {
 const BlogPosts: React.FC<Props> = ({ comment }) => {
   return (
     <div id="comment">
-      <div className="comment-wrapper space-items-big">
-        <div className="comment-icon">
-          <AnonymousUser className="user-icon" />
+      <div className="comment space-items-big">
+        <div className="comment__icon">
+          <AnonymousUser className="comment__icon__user" />
         </div>
-        <div className="comment-content">
+        <div className="comment__content">
           <strong>{comment.email}</strong>
           <div>{comment.body}</div>
         </div>

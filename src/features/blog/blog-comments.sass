@@ -2,19 +2,21 @@
 @use "../../assets/mixins.sass" as *
 
 #comment
-  .user-icon
-    width: $unit4
-    fill: $blue
-
-    @include mq($breakpoint: md)
-      width: $unit3
-
-  .comment-wrapper
+  .comment
     display: flex
     align-items: flex-start
 
-  .comment-icon
-    min-width: $unit6
+    margin: $unit-3 0
 
-    display: flex
-    justify-content: center
+    &__icon
+      min-width: $unit6
+
+      display: flex
+      justify-content: center
+
+      &__user
+        width: $unit4
+        fill: $blue
+
+        @include mq($breakpoint: md)
+          width: $unit3

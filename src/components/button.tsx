@@ -1,5 +1,3 @@
-import "@components/button.sass";
-
 import { RootState } from "@app/store";
 import { useSelector } from "react-redux";
 
