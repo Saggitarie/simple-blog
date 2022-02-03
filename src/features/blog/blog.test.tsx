@@ -10,7 +10,7 @@ describe("Test Search Input", () => {
     cleanup();
   });
 
-  test("Render Correct Results when user types matching keyword:reprehenderit", async () => {
+  test("render correct results when user types matching keyword -> reprehenderit", async () => {
     render(
       <Provider store={store}>
         <Home />
@@ -29,7 +29,7 @@ describe("Test Search Input", () => {
     });
   });
 
-  test("Render No Result When User Inputs Has Not Matching Keyword", async () => {
+  test("render no result when user types keyword with no match -> asdfasdfasdf", async () => {
     render(
       <Provider store={store}>
         <Home />
@@ -47,7 +47,7 @@ describe("Test Search Input", () => {
 });
 
 describe("Test Posts Comments", () => {
-  test("All Comments Should Be Collapsed On Initial Render", async () => {
+  test("comments should be collapsed in initial render", async () => {
     render(
       <Provider store={store}>
         <Home />
@@ -57,30 +57,30 @@ describe("Test Posts Comments", () => {
     const comments = await screen.findAllByTestId(/^blog-comments$/);
 
     comments.forEach((comment) => {
-      expect(comment).toHaveClass("comment-list-collapse");
+      expect(comment).toHaveClass("comment-refiner__list--collapse");
     });
   });
 
-  test("Comments Expansion State Should Toggle Successfully with Clicks", async () => {
+  test("comment's expansion state should toggle successfully with mouse clicks", async () => {
     render(
       <Provider store={store}>
         <Home />
       </Provider>
     );
 
-    const viewcommentsbutton = await screen.findAllByTestId(/^view-comments-button$/);
+    const viewcommentsbuttons = await screen.findAllByTestId(/^view-comments-button$/);
     const comments = await screen.findAllByTestId(/^blog-comments$/);
 
-    fireEvent.click(viewcommentsbutton[0]);
+    fireEvent.click(viewcommentsbuttons[0]);
 
-    expect(comments[0]).toHaveClass("comment-list-expand");
+    expect(comments[0]).toHaveClass("comment-refiner__list--expand");
 
-    fireEvent.click(viewcommentsbutton[0]);
+    fireEvent.click(viewcommentsbuttons[0]);
 
-    expect(comments[0]).toHaveClass("comment-list-collapse");
+    expect(comments[0]).toHaveClass("comment-refiner__list--collapse");
   });
 
-  test("Expanded Comment Panels Should Be Collapsed When Going to another page", async () => {
+  test("expanded comment panels should collapse after navigating to another list of posts", async () => {
     window.scrollTo = jest.fn();
     render(
       <Provider store={store}>
@@ -88,21 +88,21 @@ describe("Test Posts Comments", () => {
       </Provider>
     );
 
-    const viewcommentsbutton = await screen.findAllByTestId(/^view-comments-button$/);
+    const viewcommentsbuttons = await screen.findAllByTestId(/^view-comments-button$/);
     let comments = await screen.findAllByTestId(/^blog-comments$/);
     const nextbutton = await screen.findByTestId("next-button");
 
     comments.forEach((comment) => {
-      expect(comment).toHaveClass("comment-list-collapse");
+      expect(comment).toHaveClass("comment-refiner__list--collapse");
     });
 
-    fireEvent.click(viewcommentsbutton[0]);
-    expect(comments[0]).toHaveClass("comment-list-expand");
+    fireEvent.click(viewcommentsbuttons[0]);
+    expect(comments[0]).toHaveClass("comment-refiner__list--expand");
 
     fireEvent.click(nextbutton);
 
     comments = await screen.findAllByTestId(/^blog-comments$/);
 
-    expect(comments[0]).toHaveClass("comment-list-collapse");
+    expect(comments[0]).toHaveClass("comment-refiner__list--collapse");
   });
 });
